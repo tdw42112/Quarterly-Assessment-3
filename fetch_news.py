@@ -97,13 +97,26 @@ def main():
     
     # Collect all articles
     all_articles = []
+    seen_urls = set()  # Track URLs we've already added
     
     # Fetch articles for each topic
     for topic in TOPICS:
         print(f"Fetching news for: {topic}...")
         articles = fetch_news_articles(topic, NEWS_API_KEY, ARTICLES_PER_TOPIC)
-        all_articles.extend(articles)
-        print(f"  ✓ Found {len(articles)} article(s)")
+        
+        # Filter out duplicates and try to get at least one unique article per topic
+        added_for_topic = False
+        for article in articles:
+            if article['url'] not in seen_urls:
+                all_articles.append(article)
+                seen_urls.add(article['url'])
+                added_for_topic = True
+                break  # Got one unique article for this topic, move to next topic
+        
+        if added_for_topic:
+            print(f"  ✓ Found unique article")
+        else:
+            print(f"  ⚠ All articles were duplicates")
         print()
     
     # Display results
