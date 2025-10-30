@@ -1,0 +1,9 @@
+# News Newsletter Generator - Python Dependencies
+
+# For fetching news articles
+requests>=2.31.0
+
+# For AI summarization with OpenAI
+openai>=1.12.0
+
+# Note: No additional packages needed for email (uses built-in smtplib)
