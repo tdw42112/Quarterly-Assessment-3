@@ -6,7 +6,12 @@ This script combines all parts to create and send a daily newsletter
 import json
 import time
 import logging
+import sys
 from datetime import datetime
+
+# Fix Windows console encoding issues
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 # Import all the functions from previous parts
 from fetch_news import fetch_news_articles
@@ -27,17 +32,17 @@ try:
         MAX_SUMMARY_TOKENS
     )
 except ImportError:
-    print("⚠️  ERROR: config.py not found!")
+    print("ERROR: config.py not found!")
     print("Please make sure config.py exists with all required settings.")
     exit(1)
 
 
-# Set up logging
+# Set up logging with UTF-8 encoding
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('newsletter.log'),
+        logging.FileHandler('newsletter.log', encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
