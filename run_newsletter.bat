@@ -11,4 +11,4 @@ REM Run the main Python script with FULL PATH to Python
 "C:\Users\tdw42\AppData\Local\Programs\Python\Python313\python.exe" main.py
 
 REM Keep window open to see output
-pause
+REM pause
