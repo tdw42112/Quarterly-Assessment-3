@@ -495,52 +495,10 @@ tail -n 50 newsletter.log
 - Cost: GPT-4o-mini is $0.150 per 1M input tokens, $0.600 per 1M output tokens
 - **Daily cost:** ~$0.0005 (half a cent)
 
----
 
-## 🚀 Future Enhancements
 
-Potential features to add:
 
-- [ ] 📊 **Data visualization** - Charts showing article trends over time
-- [ ] 🌐 **Web dashboard** - Flask/Django interface to manage topics
-- [ ] 📱 **SMS notifications** - Send via Twilio API
-- [ ] 💾 **Database integration** - Store articles in SQLite/PostgreSQL
-- [ ] 📈 **Sentiment analysis** - Analyze tone of news (positive/negative)
-- [ ] 🌍 **Multi-language support** - Translate summaries
-- [ ] 👥 **Multiple recipients** - Send to a list of emails
-- [ ] 🎨 **Custom templates** - User-selectable email designs
-- [ ] 📅 **Weekly digest option** - Batch articles for weekly summary
-- [ ] 🔍 **Advanced filtering** - Exclude certain sources or keywords
 
----
-
-## 📝 License
-
-This project is licensed under the MIT License.
-
-```
-MIT License
-
-Copyright (c) 2024
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
 
 ---
 
@@ -550,14 +508,7 @@ SOFTWARE.
 - **OpenAI** - [https://openai.com/](https://openai.com/) - GPT-4o-mini language model
 - **Gmail SMTP** - Email delivery service
 
----
 
-## 📧 Contact
-
-For questions, issues, or suggestions:
-
-- **GitHub Issues:** [Create an issue](https://github.com/yourusername/news-newsletter-generator/issues)
-- **Email:** your.email@example.com
 
 ---
 
@@ -573,18 +524,5 @@ This project was developed as a learning exercise to demonstrate:
 - Error handling and logging
 - Documentation and README creation
 
-**Perfect for:**
-- Computer Science students
-- Python learners
-- API integration practice
-- Portfolio projects
-- Automation enthusiasts
 
----
-
-**⭐ If you found this project helpful, please consider starring it on GitHub!**
-
----
-
-*Built with ❤️ using Python, OpenAI, and NewsAPI*
 
