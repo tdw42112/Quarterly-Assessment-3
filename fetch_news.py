@@ -11,12 +11,41 @@ from datetime import datetime
 try:
     from config import NEWS_API_KEY, TOPICS, ARTICLES_PER_TOPIC
 except ImportError:
-    print("⚠️  ERROR: config.py not found!")
+    print("ERROR: config.py not found!")
     print("\nPlease follow these steps:")
     print("1. Copy 'config.example.py' and rename it to 'config.py'")
     print("2. Edit config.py and add your API keys")
     print("3. Run this script again")
     exit(1)
+
+
+def calculate_relevance_score(article, topic):
+    """
+    Calculate how relevant an article is to a topic
+    
+    Args:
+        article (dict): Article dictionary
+        topic (str): Topic to check against
+        
+    Returns:
+        int: Relevance score (higher = more relevant)
+    """
+    topic_lower = topic.lower()
+    topic_words = set(topic_lower.split())
+    
+    # Count topic mentions in title (weighted more heavily)
+    title = article.get("title", "").lower()
+    title_score = sum(3 for word in topic_words if word in title)
+    
+    # Count topic mentions in description
+    description = article.get("description", "").lower()
+    desc_score = sum(2 for word in topic_words if word in description)
+    
+    # Count topic mentions in content
+    content = article.get("content", "").lower()
+    content_score = sum(1 for word in topic_words if word in content)
+    
+    return title_score + desc_score + content_score
 
 
 def fetch_news_articles(topic, api_key, max_articles=1):
@@ -55,10 +84,10 @@ def fetch_news_articles(topic, api_key, max_articles=1):
             # Extract articles from response
             articles = data.get("articles", [])
             
-            # Format the articles
+            # Format the articles and calculate relevance
             formatted_articles = []
             for article in articles:
-                formatted_articles.append({
+                formatted_article = {
                     "topic": topic,
                     "title": article.get("title", "No title"),
                     "description": article.get("description", "No description"),
@@ -66,7 +95,13 @@ def fetch_news_articles(topic, api_key, max_articles=1):
                     "content": article.get("content", ""),
                     "published_at": article.get("publishedAt", ""),
                     "source": article.get("source", {}).get("name", "Unknown")
-                })
+                }
+                # Calculate and add relevance score
+                formatted_article["relevance_score"] = calculate_relevance_score(formatted_article, topic)
+                formatted_articles.append(formatted_article)
+            
+            # Sort by relevance score (highest first)
+            formatted_articles.sort(key=lambda x: x["relevance_score"], reverse=True)
             
             return formatted_articles
         else:
@@ -91,7 +126,7 @@ def main():
     
     # Check if API key is set
     if not NEWS_API_KEY or NEWS_API_KEY == "your_newsapi_key_here":
-        print("⚠️  ERROR: Please add your NewsAPI key to config.py")
+        print("ERROR: Please add your NewsAPI key to config.py")
         print("Get your free key at: https://newsapi.org/")
         return
     
@@ -141,10 +176,10 @@ def main():
         output_file = "fetched_articles.json"
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(all_articles, f, indent=2, ensure_ascii=False)
-        print(f"✓ Articles saved to '{output_file}'")
+        print(f">> Articles saved to '{output_file}'")
         
     else:
-        print("⚠️  No articles found. Check your API key and internet connection.")
+        print("WARNING: No articles found. Check your API key and internet connection.")
 
 
 if __name__ == "__main__":
